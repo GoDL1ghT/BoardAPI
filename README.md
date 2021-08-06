@@ -1,5 +1,18 @@
 # Простая АПИ для создания своих картин в рамках
 
+## Добавление в проект
+```gradle
+repositories {
+    //Other repos
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    //Other depends
+    implementation 'com.github.asyncdargen:BoardAPI:master-SNAPSHOT'
+}
+```
+
 **Пример: `TestPlugin.java`**
 ```java
 import net.minecraft.server.v1_12_R1.EnumDirection;
