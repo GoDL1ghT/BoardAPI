@@ -58,7 +58,7 @@ public class TestPlugin extends JavaPlugin {
         Location location = player.getEyeLocation().add(0, 2, 0);
 
         //Создание приватного борда для игрока прописавшего команду
-        BoardAPI.createPrivateBanner(location, EnumDirection.WEST, 3, 3, player);
+        BannerBoard board = BoardAPI.createPrivateBanner(location, EnumDirection.WEST, 3, 3, player);
 
         //Отрисовка текста
         BoardRenderer renderer = board.getRenderer();

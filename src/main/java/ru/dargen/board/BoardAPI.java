@@ -14,10 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.dargen.board.impl.PrivateBannerBoard;
@@ -67,6 +64,16 @@ public class BoardAPI extends BukkitRunnable implements Listener {
                 if (board.getInteractListener() != null)
                     board.getInteractListener().accept(action, player);
         });
+    }
+
+    @EventHandler
+    void teleport(PlayerTeleportEvent e) {
+        boardsCache.forEach(board -> board.destroy(e.getPlayer()));
+    }
+
+    @EventHandler
+    void worldChange(PlayerChangedWorldEvent e) {
+        boardsCache.forEach(board -> board.destroy(e.getPlayer()));
     }
 
     @EventHandler
