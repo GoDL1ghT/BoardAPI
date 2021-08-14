@@ -24,6 +24,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
 
+import static org.bukkit.event.EventPriority.LOWEST;
+
 public class BoardAPI extends BukkitRunnable implements Listener {
 
     private static BoardAPI api;
@@ -66,32 +68,32 @@ public class BoardAPI extends BukkitRunnable implements Listener {
         });
     }
 
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     void teleport(PlayerTeleportEvent e) {
         boardsCache.forEach(board -> board.destroy(e.getPlayer()));
     }
 
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     void worldChange(PlayerChangedWorldEvent e) {
         boardsCache.forEach(board -> board.destroy(e.getPlayer()));
     }
 
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     void quit(PlayerQuitEvent e) {
         boardsCache.forEach(board -> board.destroy(e.getPlayer()));
     }
 
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     public void kick(PlayerKickEvent e) {
         boardsCache.forEach(board -> board.destroy(e.getPlayer()));
     }
 
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     public void respawn(PlayerRespawnEvent e) {
         boardsCache.forEach(board -> board.destroy(e.getPlayer()));
     }
 
-    @EventHandler
+    @EventHandler(priority = LOWEST)
     public void join(PlayerJoinEvent e) {
         boardsCache.forEach(board -> board.update(e.getPlayer()));
         ((CraftPlayer) e.getPlayer()).getHandle().playerConnection.networkManager.channel.pipeline().addAfter("decoder", "inListener", new MessageToMessageDecoder<Packet<PacketListenerPlayIn>>() {
